@@ -1,14 +1,16 @@
-const User = require("../models/User");
+// controllers/userController.js
+const User = require('../models/User');
 
-exports.createUser = async (req, res) => {
+const contactUser = async (req, res) => {
   try {
+    console.log("Request body:", req.body);
     const { name, email, message } = req.body;
-
-    const newUser = new User({ name, email, message });
-    await newUser.save();
-
-    res.status(201).json({ success: true, message: "Message saved successfully!" });
+    const newUser = await User.create({ name, email, message });
+    res.status(201).json({ success: true, data: newUser });
   } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
+    console.error("Backend error:", error.message);
+    res.status(500).json({ success: false, message: error.message });
   }
 };
+
+module.exports = { contactUser };

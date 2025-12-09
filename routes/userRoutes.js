@@ -1,7 +1,8 @@
-const express = require("express");
+// routes/userRoutes.js
+const express = require('express');
 const router = express.Router();
-const { createUser } = require("../controllers/userController");
+const { contactUser } = require('../controllers/userController');  // <-- import check करा
 
-router.post("/", createUser);
+router.post('/contact', contactUser);
 
 module.exports = router;
